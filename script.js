@@ -62,7 +62,7 @@
     "South Carolina": { name: "South Carolina Secretary of State",    url: "https://businessfilings.sc.gov/BusinessFiling/Entity/Search" },
     "South Dakota":   { name: "South Dakota Secretary of State",      url: "https://sosenterprise.sd.gov/BusinessServices/Business/FilingSearch.aspx" },
     "Tennessee":      { name: "Tennessee Secretary of State",         url: "https://tnbear.tn.gov/Ecommerce/FilingSearch.aspx" },
-    "Texas":          { name: "Texas Secretary of State",             url: "https://mycpa.cpa.state.tx.us/coa/Index.html" },
+    "Texas":          { name: "Texas Secretary of State",             url: "https://www.sos.state.tx.us/corp/sosda/index.shtml" },
     "Utah":           { name: "Utah Division of Corporations",        url: "https://secure.utah.gov/bes/" },
     "Vermont":        { name: "Vermont Secretary of State",           url: "https://bizfilings.vermont.gov/online/BusinessInquire" },
     "Virginia":       { name: "Virginia SCC",                         url: "https://cis.scc.virginia.gov/EntitySearch/Index" },
