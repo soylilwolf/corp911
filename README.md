@@ -29,6 +29,6 @@ Open `index.html` in your browser to preview the widget.
 
 2. Copy the `<div class="corp911-tab">…</div>` block from `index.html` into your page wherever you want the widget to appear.
 
-3. The widget initialises automatically on `DOMContentLoaded` — no additional setup is required.
+3. The widget initializes automatically on `DOMContentLoaded` — no additional setup is required.
 
 > **Note:** The status lookup currently uses simulated data. Replace the `setTimeout` block inside `performLookup()` in `script.js` with a real API call to connect to your backend.
