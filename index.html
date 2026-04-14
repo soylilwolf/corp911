@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Check your corporation's suspension status and schedule reinstatement consultations with Corp911." />
   <title>Corporation Suspension Checker | Corp911</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -202,6 +203,7 @@
             <div id="slots-container">
               <p class="slots-placeholder">Please select a date to view available time slots.</p>
             </div>
+            <span class="field-error" id="slot-error"></span>
           </div>
 
           <!-- Right: Booking Form -->
@@ -395,10 +397,10 @@
         <div class="footer-col">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="#" onclick="switchTab('search'); return false;">Suspension Check</a></li>
-            <li><a href="#" onclick="switchTab('appointments'); return false;">Appointments</a></li>
-            <li><a href="#" onclick="switchTab('info'); return false;">Information</a></li>
-            <li><a href="#" onclick="switchTab('resources'); return false;">Resources</a></li>
+            <li><a href="#" class="footer-nav-link" data-tab="search">Suspension Check</a></li>
+            <li><a href="#" class="footer-nav-link" data-tab="appointments">Appointments</a></li>
+            <li><a href="#" class="footer-nav-link" data-tab="info">Information</a></li>
+            <li><a href="#" class="footer-nav-link" data-tab="resources">Resources</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -411,7 +413,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 Corporation Suspension Checker. This tool provides informational results only. For official status, check your state's Secretary of State website. For professional assistance, visit <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer">Corp911.com</a>.</p>
+        <p>&copy; 2026 Corporation Suspension Checker. This tool provides informational results only. For official status, check your state's Secretary of State website. For professional assistance, visit <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer">Corp911.com</a>.</p>
       </div>
     </div>
   </footer>

@@ -73,7 +73,7 @@ function getMockResult(corpName, state, entityNum) {
     name:       corpName,
     state:      stateNames[state] || state,
     stateCode:  state,
-    entityNum:  entityNum || 'C' + Math.abs(corpName.split('').reduce((a, c) => a * ENTITY_NUM_HASH_MULT + c.charCodeAt(0), 0) % ENTITY_NUM_RANGE + ENTITY_NUM_BASE),
+    entityNum:  entityNum || 'C' + Math.abs(corpName.split('').reduce((a, c) => ((a * ENTITY_NUM_HASH_MULT + c.charCodeAt(0)) >>> 0), 0) % ENTITY_NUM_RANGE + ENTITY_NUM_BASE),
     type:       entityTypes[corpName.length % 4],
     filed:      filedDate.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' }),
     since:      `${['January','February','March','April','May','June','July','August','September','October','November','December'][sinceYear % 12]} ${2020 + sinceYear % 4}`,
@@ -179,7 +179,7 @@ function getSlotAvailability(dateStr) {
   const HASH_MULT = 31;           // Bernstein hash multiplier (shared with entity number hash)
   const SLOT_OFFSET = 7;         // spread slots across the hash space
   const AVAIL_DIVISOR = 3;       // ~2 out of 3 slots are available
-  const hash = dateStr.split('').reduce((a, c) => a * HASH_MULT + c.charCodeAt(0), 0);
+  const hash = dateStr.split('').reduce((a, c) => ((a * HASH_MULT + c.charCodeAt(0)) >>> 0), 0);
   return TIME_SLOTS.map((slot, i) => ({
     ...slot,
     available: ((hash + i * SLOT_OFFSET) % AVAIL_DIVISOR) !== 0,   // ~2/3 slots available
@@ -201,28 +201,53 @@ function renderSlots(dateStr) {
   };
   slots.forEach(s => periods[s.period].slots.push(s));
 
-  let html = '';
+  container.textContent = '';
+
   Object.values(periods).forEach(({ label, slots: pSlots }) => {
     if (!pSlots.length) return;
-    html += `<div class="slots-section-label">${label}</div><div class="slots-grid">`;
+
+    const sectionLabel = document.createElement('div');
+    sectionLabel.className = 'slots-section-label';
+    sectionLabel.textContent = label;
+    container.appendChild(sectionLabel);
+
+    const grid = document.createElement('div');
+    grid.className = 'slots-grid';
+
     pSlots.forEach(slot => {
-      const isSelected  = slot.id === selectedSlotId;
-      const stateClass  = isSelected ? 'selected' : (slot.available ? 'available' : 'unavailable');
-      const availLabel  = isSelected ? 'Selected' : (slot.available ? 'Available' : 'Booked');
-      const disabled    = slot.available ? '' : 'disabled aria-disabled="true"';
-      html += `
-        <button type="button" class="slot-btn ${stateClass}" data-slot-id="${slot.id}" data-slot-label="${slot.label}" ${disabled}>
-          <span class="slot-time">${slot.label}</span>
-          <span class="slot-avail-label">${availLabel}</span>
-        </button>`;
+      const isSelected = slot.id === selectedSlotId;
+      const stateClass = isSelected ? 'selected' : (slot.available ? 'available' : 'unavailable');
+      const availLabel = isSelected ? 'Selected' : (slot.available ? 'Available' : 'Booked');
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `slot-btn ${stateClass}`;
+      btn.dataset.slotId    = slot.id;
+      btn.dataset.slotLabel = slot.label;
+      if (!slot.available) {
+        btn.disabled = true;
+        btn.setAttribute('aria-disabled', 'true');
+      }
+
+      const timeSpan = document.createElement('span');
+      timeSpan.className = 'slot-time';
+      timeSpan.textContent = slot.label;
+
+      const availSpan = document.createElement('span');
+      availSpan.className = 'slot-avail-label';
+      availSpan.textContent = availLabel;
+
+      btn.appendChild(timeSpan);
+      btn.appendChild(availSpan);
+
+      if (slot.available || isSelected) {
+        btn.addEventListener('click', () => selectSlot(btn.dataset.slotId, btn.dataset.slotLabel, dateStr));
+      }
+
+      grid.appendChild(btn);
     });
-    html += '</div>';
-  });
 
-  container.innerHTML = html;
-
-  container.querySelectorAll('.slot-btn.available, .slot-btn.selected').forEach(btn => {
-    btn.addEventListener('click', () => selectSlot(btn.dataset.slotId, btn.dataset.slotLabel, dateStr));
+    container.appendChild(grid);
   });
 }
 
@@ -231,13 +256,14 @@ function selectSlot(slotId, slotLabel, dateStr) {
   selectedSlotDate  = dateStr;
   selectedSlotLabel = slotLabel;
 
-  const dateObj    = new Date(dateStr + 'T12:00:00');
+  const dateObj    = new Date(dateStr + 'T12:00:00'); // Use noon to avoid timezone off-by-one issues
   const dateFormatted = dateObj.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
   const fullLabel  = `${slotLabel} on ${dateFormatted}`;
 
   document.getElementById('selected-slot-text').textContent = fullLabel;
   document.getElementById('selected-slot-display').hidden = false;
   document.getElementById('book-btn').disabled = false;
+  document.getElementById('slot-error').textContent = '';
 
   renderSlots(dateStr);
 }
@@ -304,8 +330,10 @@ function validateApptForm() {
   });
 
   if (!selectedSlotId) {
-    alert('Please select an available time slot before booking.');
+    document.getElementById('slot-error').textContent = 'Please select an available time slot before booking.';
     valid = false;
+  } else {
+    document.getElementById('slot-error').textContent = '';
   }
 
   return valid;
@@ -353,4 +381,12 @@ document.querySelector('.tab-list').addEventListener('keydown', function (e) {
     tabs[next].focus();
     switchTab(tabs[next].dataset.tab);
   }
+});
+
+/* ---- Footer Quick Links ---- */
+document.querySelectorAll('.footer-nav-link[data-tab]').forEach(link => {
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    switchTab(this.dataset.tab);
+  });
 });

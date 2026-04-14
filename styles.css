@@ -231,6 +231,15 @@ li { margin-bottom: .35rem; }
   text-decoration: none;
 }
 .btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn:focus-visible,
+.slot-btn:focus-visible,
+.tab-btn:focus-visible,
+.link-btn:focus-visible,
+.header-cta:focus-visible,
+.clear-slot-btn:focus-visible {
+  outline: 2px solid var(--color-primary-lt);
+  outline-offset: 2px;
+}
 .btn-primary {
   background: var(--color-primary);
   color: #fff;
