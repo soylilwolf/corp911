@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corp911 – Corporation Suspension Checker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body style="margin: 0; padding: 40px 16px; background: #eee; font-family: sans-serif;">
+
+<!-- ============================================================
+     Corp911 Suspension Corporation Tab
+     Drop this <div class="corp911-tab"> ... </div> block, along
+     with styles.css and script.js, into any existing page.
+     ============================================================ -->
+<div class="corp911-tab">
+
+  <!-- Header -->
+  <div class="tab-header">
+    <h1>Corp911 – Suspension Checker</h1>
+    <p>Look up your corporation or LLC status and get help with reinstatement.</p>
+  </div>
+
+  <!-- Tab Navigation -->
+  <ul class="tab-nav" role="tablist">
+    <li><button class="active" data-tab="panel-lookup" role="tab" aria-selected="true">Status Lookup</button></li>
+    <li><button data-tab="panel-appointment" role="tab" aria-selected="false">Book Appointment</button></li>
+    <li><button data-tab="panel-resources" role="tab" aria-selected="false">Resources</button></li>
+  </ul>
+
+  <!-- ─── Panel: Status Lookup ─────────────────────────────────── -->
+  <div class="tab-content">
+    <div id="panel-lookup" class="tab-panel active" role="tabpanel">
+      <h2>Corporation / LLC Suspension Status</h2>
+      <p>Enter your business name and state to check its current standing.</p>
+
+      <div id="lookup-alert" class="alert hidden"></div>
+
+      <form id="lookup-form" class="lookup-form" autocomplete="off">
+        <input type="text" id="corp-name" placeholder="Corporation or LLC name" aria-label="Corporation or LLC name" />
+        <select id="corp-state" aria-label="State">
+          <option value="">State</option>
+          <option value="Alabama">Alabama</option>
+          <option value="Alaska">Alaska</option>
+          <option value="Arizona">Arizona</option>
+          <option value="Arkansas">Arkansas</option>
+          <option value="California">California</option>
+          <option value="Colorado">Colorado</option>
+          <option value="Connecticut">Connecticut</option>
+          <option value="Delaware">Delaware</option>
+          <option value="Florida">Florida</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Hawaii">Hawaii</option>
+          <option value="Idaho">Idaho</option>
+          <option value="Illinois">Illinois</option>
+          <option value="Indiana">Indiana</option>
+          <option value="Iowa">Iowa</option>
+          <option value="Kansas">Kansas</option>
+          <option value="Kentucky">Kentucky</option>
+          <option value="Louisiana">Louisiana</option>
+          <option value="Maine">Maine</option>
+          <option value="Maryland">Maryland</option>
+          <option value="Massachusetts">Massachusetts</option>
+          <option value="Michigan">Michigan</option>
+          <option value="Minnesota">Minnesota</option>
+          <option value="Mississippi">Mississippi</option>
+          <option value="Missouri">Missouri</option>
+          <option value="Montana">Montana</option>
+          <option value="Nebraska">Nebraska</option>
+          <option value="Nevada">Nevada</option>
+          <option value="New Hampshire">New Hampshire</option>
+          <option value="New Jersey">New Jersey</option>
+          <option value="New Mexico">New Mexico</option>
+          <option value="New York">New York</option>
+          <option value="North Carolina">North Carolina</option>
+          <option value="North Dakota">North Dakota</option>
+          <option value="Ohio">Ohio</option>
+          <option value="Oklahoma">Oklahoma</option>
+          <option value="Oregon">Oregon</option>
+          <option value="Pennsylvania">Pennsylvania</option>
+          <option value="Rhode Island">Rhode Island</option>
+          <option value="South Carolina">South Carolina</option>
+          <option value="South Dakota">South Dakota</option>
+          <option value="Tennessee">Tennessee</option>
+          <option value="Texas">Texas</option>
+          <option value="Utah">Utah</option>
+          <option value="Vermont">Vermont</option>
+          <option value="Virginia">Virginia</option>
+          <option value="Washington">Washington</option>
+          <option value="West Virginia">West Virginia</option>
+          <option value="Wisconsin">Wisconsin</option>
+          <option value="Wyoming">Wyoming</option>
+        </select>
+        <button type="submit" class="btn-primary">Check Status</button>
+      </form>
+
+      <div class="spinner" id="lookup-spinner"></div>
+
+      <div id="lookup-result" class="result-card hidden">
+        <h3 class="corp-name-display"></h3>
+        <span class="status-badge"></span>
+
+        <div class="result-details">
+          <dl>
+            <dt>State</dt>
+            <dd class="result-state"></dd>
+            <dt>Checked On</dt>
+            <dd class="result-date"></dd>
+          </dl>
+        </div>
+
+        <div class="result-cta" style="display:none;">
+          <p><strong>Your corporation appears to be suspended.</strong> We can help you get reinstated quickly.</p>
+          <button class="btn-primary" data-goto-tab="panel-appointment">Book a Reinstatement Consultation</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Panel: Book Appointment ──────────────────────────────── -->
+    <div id="panel-appointment" class="tab-panel" role="tabpanel">
+      <h2>Schedule a Consultation</h2>
+      <p>Fill out the form below and one of our reinstatement specialists will be in touch.</p>
+
+      <div id="appt-alert" class="alert hidden"></div>
+
+      <form id="appointment-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="appt-name">Full Name *</label>
+            <input type="text" id="appt-name" required />
+          </div>
+          <div class="form-group">
+            <label for="appt-email">Email Address *</label>
+            <input type="email" id="appt-email" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="appt-phone">Phone Number</label>
+            <input type="tel" id="appt-phone" />
+          </div>
+          <div class="form-group">
+            <label for="appt-corp">Corporation / LLC Name *</label>
+            <input type="text" id="appt-corp" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="appt-date">Preferred Date *</label>
+            <input type="date" id="appt-date" required />
+          </div>
+          <div class="form-group">
+            <label for="appt-time">Preferred Time *</label>
+            <select id="appt-time" required>
+              <option value="">Select a time</option>
+              <option value="9:00 AM">9:00 AM</option>
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="12:00 PM">12:00 PM</option>
+              <option value="1:00 PM">1:00 PM</option>
+              <option value="2:00 PM">2:00 PM</option>
+              <option value="3:00 PM">3:00 PM</option>
+              <option value="4:00 PM">4:00 PM</option>
+              <option value="5:00 PM">5:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="appt-notes">Additional Notes</label>
+          <textarea id="appt-notes" rows="3" placeholder="Tell us about your situation…"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Request Appointment</button>
+      </form>
+
+      <div id="appt-confirmation" class="confirmation hidden">
+        <h3>✓ Appointment Requested</h3>
+        <p>Thank you, <strong class="confirm-name"></strong>. We've received your request for <strong class="confirm-date"></strong> at <strong class="confirm-time"></strong>.</p>
+        <p>A confirmation email will be sent shortly.</p>
+      </div>
+    </div>
+
+    <!-- ─── Panel: Resources ─────────────────────────────────────── -->
+    <div id="panel-resources" class="tab-panel" role="tabpanel">
+      <h2>Suspension &amp; Reinstatement Resources</h2>
+      <p>Learn more about what a corporate suspension means and how to resolve it.</p>
+
+      <div class="resource-grid">
+        <div class="resource-card">
+          <h3>What Is a Corporate Suspension?</h3>
+          <p>A suspension occurs when a state agency (typically the Franchise Tax Board or Secretary of State) revokes a corporation's or LLC's right to conduct business, usually due to unpaid taxes or unfiled statements.</p>
+          <a href="https://corp911.com/what-is-suspension" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+
+        <div class="resource-card">
+          <h3>Common Causes</h3>
+          <p>Failure to file annual reports, unpaid franchise taxes, not maintaining a registered agent, or failure to file a Statement of Information are the most frequent causes.</p>
+          <a href="https://corp911.com/common-causes" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+
+        <div class="resource-card">
+          <h3>Reinstatement Process</h3>
+          <p>Reinstatement typically involves filing overdue documents, paying back taxes and penalties, and submitting a reinstatement application to the appropriate state agency.</p>
+          <a href="https://corp911.com/reinstatement" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+
+        <div class="resource-card">
+          <h3>Why Act Quickly?</h3>
+          <p>A suspended corporation cannot legally enter contracts, file lawsuits, or defend itself in court. Officers may also face personal liability for business debts incurred during suspension.</p>
+          <a href="https://corp911.com/act-quickly" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Corp911 Suspension Corporation Tab -->
+
+<script src="script.js"></script>
+</body>
+</html>

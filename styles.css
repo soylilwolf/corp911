@@ -1,0 +1,389 @@
+/* Corp911 - Suspension Corporation Tab Styles */
+/* Self-contained styles scoped under .corp911-tab for safe embedding */
+
+.corp911-tab {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Header */
+.corp911-tab .tab-header {
+  background: linear-gradient(135deg, #1a237e, #283593);
+  color: #fff;
+  padding: 24px 32px;
+}
+
+.corp911-tab .tab-header h1 {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.corp911-tab .tab-header p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* Navigation Tabs */
+.corp911-tab .tab-nav {
+  display: flex;
+  background: #f5f5f5;
+  border-bottom: 2px solid #e0e0e0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.corp911-tab .tab-nav li {
+  flex: 1;
+}
+
+.corp911-tab .tab-nav button {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #555;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.corp911-tab .tab-nav button:hover {
+  color: #1a237e;
+  background: #e8eaf6;
+}
+
+.corp911-tab .tab-nav button.active {
+  color: #1a237e;
+  border-bottom-color: #1a237e;
+  background: #fff;
+}
+
+/* Tab Content Panels */
+.corp911-tab .tab-content {
+  padding: 32px;
+  min-height: 320px;
+}
+
+.corp911-tab .tab-panel {
+  display: none;
+}
+
+.corp911-tab .tab-panel.active {
+  display: block;
+}
+
+/* Status Lookup Section */
+.corp911-tab .lookup-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.corp911-tab .lookup-form input[type="text"] {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.corp911-tab .lookup-form input[type="text"]:focus {
+  border-color: #1a237e;
+}
+
+.corp911-tab .lookup-form select {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.corp911-tab .lookup-form select:focus {
+  border-color: #1a237e;
+}
+
+.corp911-tab .btn-primary {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: #1a237e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.corp911-tab .btn-primary:hover {
+  background: #283593;
+}
+
+.corp911-tab .btn-primary:disabled {
+  background: #9e9e9e;
+  cursor: not-allowed;
+}
+
+/* Results Card */
+.corp911-tab .result-card {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 16px;
+}
+
+.corp911-tab .result-card.hidden {
+  display: none;
+}
+
+.corp911-tab .result-card h3 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+.corp911-tab .result-card .status-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.corp911-tab .status-badge.suspended {
+  background: #ffcdd2;
+  color: #b71c1c;
+}
+
+.corp911-tab .status-badge.active {
+  background: #c8e6c9;
+  color: #1b5e20;
+}
+
+.corp911-tab .status-badge.unknown {
+  background: #fff9c4;
+  color: #f57f17;
+}
+
+.corp911-tab .result-details {
+  margin-top: 16px;
+}
+
+.corp911-tab .result-details dl {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 8px 16px;
+  margin: 0;
+}
+
+.corp911-tab .result-details dt {
+  font-weight: 600;
+  color: #555;
+}
+
+.corp911-tab .result-details dd {
+  margin: 0;
+}
+
+/* CTA after result */
+.corp911-tab .result-cta {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Appointment Form */
+.corp911-tab .form-group {
+  margin-bottom: 20px;
+}
+
+.corp911-tab .form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.corp911-tab .form-group input,
+.corp911-tab .form-group select,
+.corp911-tab .form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.corp911-tab .form-group input:focus,
+.corp911-tab .form-group select:focus,
+.corp911-tab .form-group textarea:focus {
+  border-color: #1a237e;
+}
+
+.corp911-tab .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Confirmation message */
+.corp911-tab .confirmation {
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.corp911-tab .confirmation.hidden {
+  display: none;
+}
+
+.corp911-tab .confirmation h3 {
+  color: #2e7d32;
+  margin: 0 0 8px;
+}
+
+.corp911-tab .confirmation p {
+  margin: 0;
+  color: #555;
+}
+
+/* Resources Section */
+.corp911-tab .resource-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.corp911-tab .resource-card {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: box-shadow 0.2s;
+}
+
+.corp911-tab .resource-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.corp911-tab .resource-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #1a237e;
+}
+
+.corp911-tab .resource-card p {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.corp911-tab .resource-card a {
+  color: #1a237e;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.corp911-tab .resource-card a:hover {
+  text-decoration: underline;
+}
+
+/* Loading Spinner */
+.corp911-tab .spinner {
+  display: none;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #1a237e;
+  border-radius: 50%;
+  animation: corp911-spin 0.7s linear infinite;
+  margin: 16px auto;
+}
+
+.corp911-tab .spinner.visible {
+  display: block;
+}
+
+@keyframes corp911-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Alert messages */
+.corp911-tab .alert {
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.corp911-tab .alert.hidden {
+  display: none;
+}
+
+.corp911-tab .alert-error {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.corp911-tab .alert-info {
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #90caf9;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .corp911-tab .tab-content {
+    padding: 20px 16px;
+  }
+
+  .corp911-tab .lookup-form {
+    flex-direction: column;
+  }
+
+  .corp911-tab .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .corp911-tab .resource-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .corp911-tab .result-details dl {
+    grid-template-columns: 1fr;
+  }
+
+  .corp911-tab .tab-nav button {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
+}
