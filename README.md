@@ -1,9 +1,10 @@
 # Corp911 - Corporation Suspension Checker
 
-A self-contained, embeddable tab widget for checking corporate suspension status and booking reinstatement consultations.
+A self-contained, embeddable tab widget for checking corporate suspension status and booking reinstatement consultations. The status lookup connects to each state's Secretary of State / licensing board records.
 
 ## Features
-- **Status Lookup** – Enter a corporation/LLC name and state to check suspension status.
+- **Status Lookup** – Enter a corporation/LLC name and state to check suspension status against official state records.
+- **State Record Integration** – Maps all 50 U.S. states to their official Secretary of State business entity search portals. When a backend API is configured, results include entity number, filing date, registered agent, and suspension details pulled from state records.
 - **Appointment Scheduling** – Book a reinstatement consultation directly from the widget.
 - **Resources** – Educational content about suspensions, common causes, and the reinstatement process.
 - **Responsive** – Works on desktop and mobile screens.
@@ -14,10 +15,47 @@ A self-contained, embeddable tab widget for checking corporate suspension status
 |------|---------|
 | `index.html` | Standalone demo page containing the tab markup |
 | `styles.css` | All styles, scoped under `.corp911-tab` |
-| `script.js` | Tab navigation, status lookup, and appointment form logic |
+| `script.js` | Tab navigation, state registry, status lookup, and appointment form logic |
 
 ## Getting Started
 Open `index.html` in your browser to preview the widget.
+
+## How the Status Lookup Works
+
+### Without a backend (default)
+When no backend API is configured, clicking **Check Status** directs the user to the correct state's official Secretary of State business entity search portal. The widget knows the URL for all 50 states.
+
+### With a backend API
+Set `window.Corp911.apiBase` before the script loads:
+
+```html
+<script>
+  window.Corp911 = { apiBase: "https://your-backend.example.com/api" };
+</script>
+<script src="script.js"></script>
+```
+
+The widget will call:
+
+```
+GET {apiBase}/lookup?name={corpName}&state={state}
+```
+
+Expected JSON response:
+
+```json
+{
+  "status": "suspended",
+  "entityNumber": "C1234567",
+  "entityType": "Corporation",
+  "filingDate": "2015-03-12",
+  "registeredAgent": "Agent Name",
+  "suspensionDate": "2023-01-15",
+  "suspensionReason": "Tax default"
+}
+```
+
+If the API call fails, the widget automatically falls back to directing the user to the state's official portal.
 
 ## Embedding Into an Existing Website
 
@@ -31,4 +69,4 @@ Open `index.html` in your browser to preview the widget.
 
 3. The widget initializes automatically on `DOMContentLoaded` — no additional setup is required.
 
-> **Note:** The status lookup currently uses simulated data. Replace the `setTimeout` block inside `performLookup()` in `script.js` with a real API call to connect to your backend.
+4. Optionally configure `window.Corp911.apiBase` to enable live lookups against your backend (see above).

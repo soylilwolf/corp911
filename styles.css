@@ -212,6 +212,79 @@
   border-top: 1px solid #e0e0e0;
 }
 
+/* Extended detail rows */
+.corp911-tab .detail-extended {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 12px 0 0;
+}
+
+.corp911-tab .detail-extended .detail-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 4px 16px;
+}
+
+.corp911-tab .detail-extended .detail-row.hidden {
+  display: none;
+}
+
+.corp911-tab .detail-extended dt {
+  font-weight: 600;
+  color: #555;
+  padding: 4px 0;
+}
+
+.corp911-tab .detail-extended dd {
+  margin: 0;
+  padding: 4px 0;
+}
+
+/* Source link */
+.corp911-tab .result-source {
+  margin-top: 16px;
+}
+
+.corp911-tab .result-source.hidden {
+  display: none;
+}
+
+.corp911-tab .result-source-link {
+  color: #1a237e;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.corp911-tab .result-source-link:hover {
+  text-decoration: underline;
+}
+
+/* Portal fallback card */
+.corp911-tab .portal-card p {
+  margin: 0 0 12px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.corp911-tab .portal-note {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.corp911-tab .link-btn {
+  background: none;
+  border: none;
+  color: #1a237e;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  text-decoration: underline;
+}
+
 /* Appointment Form */
 .corp911-tab .form-group {
   margin-bottom: 20px;
@@ -379,6 +452,10 @@
   }
 
   .corp911-tab .result-details dl {
+    grid-template-columns: 1fr;
+  }
+
+  .corp911-tab .detail-extended .detail-row {
     grid-template-columns: 1fr;
   }
 

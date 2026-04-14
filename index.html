@@ -107,12 +107,53 @@
             <dt>Checked On</dt>
             <dd class="result-date"></dd>
           </dl>
+
+          <!-- Extended fields populated from state records -->
+          <dl class="detail-extended">
+            <div class="detail-row hidden">
+              <dt>Entity Number</dt>
+              <dd class="result-entity-number">—</dd>
+            </div>
+            <div class="detail-row hidden">
+              <dt>Entity Type</dt>
+              <dd class="result-entity-type">—</dd>
+            </div>
+            <div class="detail-row hidden">
+              <dt>Filing Date</dt>
+              <dd class="result-filing-date">—</dd>
+            </div>
+            <div class="detail-row hidden">
+              <dt>Registered Agent</dt>
+              <dd class="result-agent">—</dd>
+            </div>
+            <div class="detail-row hidden">
+              <dt>Suspension Date</dt>
+              <dd class="result-suspension-date">—</dd>
+            </div>
+            <div class="detail-row hidden">
+              <dt>Suspension Reason</dt>
+              <dd class="result-suspension-reason">—</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="result-source hidden">
+          <a class="result-source-link" href="#" target="_blank" rel="noopener"></a>
         </div>
 
         <div class="result-cta" style="display:none;">
           <p><strong>Your corporation appears to be suspended.</strong> We can help you get reinstated quickly.</p>
           <button class="btn-primary" data-goto-tab="panel-appointment">Book a Reinstatement Consultation</button>
         </div>
+      </div>
+
+      <!-- State portal fallback (shown when no backend API is configured) -->
+      <div id="lookup-portal" class="result-card portal-card hidden">
+        <h3>Look Up "<span class="portal-corp-name"></span>" in <span class="portal-state-name"></span></h3>
+        <p class="portal-error alert alert-error hidden"></p>
+        <p>Corporate status records for <strong class="portal-state-name"></strong> are maintained by the <strong class="portal-source-name"></strong>. Use their official business search to check standing, suspension status, and filing history.</p>
+        <a class="portal-link btn-primary" href="#" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none;margin-top:12px;"></a>
+        <p class="portal-note">After verifying your status, <button class="link-btn" data-goto-tab="panel-appointment">book a consultation</button> if you need help with reinstatement.</p>
       </div>
     </div>
 
