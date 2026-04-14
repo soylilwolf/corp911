@@ -58,8 +58,14 @@ function getMockResult(corpName, state, entityNum) {
   const entityTypes = ['Corporation', 'Limited Liability Company', 'S-Corporation', 'Professional Corporation'];
   const agents = ['CT Corporation System', 'Registered Agents Inc.', 'National Registered Agents', 'The Corporation Trust Company'];
 
-  const now = new Date();
-  const filedYear = 2008 + (corpName.charCodeAt(0) % 15);
+  // Mock date fields – deterministic based on corp name chars so same input yields same output
+  const FILED_YEAR_BASE = 2008;
+  const FILED_YEAR_RANGE = 15;          // spans 2008–2022
+  const ENTITY_NUM_HASH_MULT = 31;      // classic Bernstein hash multiplier
+  const ENTITY_NUM_RANGE = 9000000;     // keeps entity number in 7-digit range
+  const ENTITY_NUM_BASE  = 1000000;     // ensures number starts with 1–9
+
+  const filedYear = FILED_YEAR_BASE + (corpName.charCodeAt(0) % FILED_YEAR_RANGE);
   const filedDate = new Date(filedYear, corpName.charCodeAt(1) % 12, (corpName.charCodeAt(2) % 28) + 1);
   const sinceYear = 2019 + (corpName.length % 4);
 
@@ -67,7 +73,7 @@ function getMockResult(corpName, state, entityNum) {
     name:       corpName,
     state:      stateNames[state] || state,
     stateCode:  state,
-    entityNum:  entityNum || 'C' + Math.abs(corpName.split('').reduce((a, c) => a * 31 + c.charCodeAt(0), 0) % 9000000 + 1000000),
+    entityNum:  entityNum || 'C' + Math.abs(corpName.split('').reduce((a, c) => a * ENTITY_NUM_HASH_MULT + c.charCodeAt(0), 0) % ENTITY_NUM_RANGE + ENTITY_NUM_BASE),
     type:       entityTypes[corpName.length % 4],
     filed:      filedDate.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' }),
     since:      `${['January','February','March','April','May','June','July','August','September','October','November','December'][sinceYear % 12]} ${2020 + sinceYear % 4}`,
@@ -170,10 +176,13 @@ const TIME_SLOTS = [
 
 /** Generate deterministic mock availability for a given date string */
 function getSlotAvailability(dateStr) {
-  const hash = dateStr.split('').reduce((a, c) => a * 31 + c.charCodeAt(0), 0);
+  const HASH_MULT = 31;           // Bernstein hash multiplier (shared with entity number hash)
+  const SLOT_OFFSET = 7;         // spread slots across the hash space
+  const AVAIL_DIVISOR = 3;       // ~2 out of 3 slots are available
+  const hash = dateStr.split('').reduce((a, c) => a * HASH_MULT + c.charCodeAt(0), 0);
   return TIME_SLOTS.map((slot, i) => ({
     ...slot,
-    available: ((hash + i * 7) % 3) !== 0,   // ~2/3 slots available
+    available: ((hash + i * SLOT_OFFSET) % AVAIL_DIVISOR) !== 0,   // ~2/3 slots available
   }));
 }
 
