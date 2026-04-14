@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporation Suspension Checker | Corp911</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">&#9670;</span>
+          <span class="logo-text">Corp<strong>911</strong></span>
+        </div>
+        <h1 class="site-title">Corporation Suspension Checker</h1>
+        <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer" class="header-cta">
+          Get Professional Help &rarr;
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav class="tab-nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <ul class="tab-list" role="tablist">
+        <li role="presentation">
+          <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-search" id="tab-search" data-tab="search">
+            <span class="tab-icon">&#128269;</span> Suspension Check
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-appointments" id="tab-appointments" data-tab="appointments">
+            <span class="tab-icon">&#128197;</span> Appointments
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-info" id="tab-info" data-tab="info">
+            <span class="tab-icon">&#8505;</span> Information
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-resources" id="tab-resources" data-tab="resources">
+            <span class="tab-icon">&#128279;</span> Resources
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Suspension Check Tab -->
+      <section id="panel-search" class="tab-panel active" role="tabpanel" aria-labelledby="tab-search">
+        <div class="panel-header">
+          <h2>Check Corporation Suspension Status</h2>
+          <p class="panel-subtitle">Enter your corporation details below to check its current status with the state.</p>
+        </div>
+
+        <div class="card search-card">
+          <form id="search-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="corp-name">Corporation Name <span class="required">*</span></label>
+                <input type="text" id="corp-name" name="corp-name" placeholder="e.g. Acme Corporation" required />
+                <span class="field-error" id="corp-name-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="corp-state">State <span class="required">*</span></label>
+                <select id="corp-state" name="corp-state" required>
+                  <option value="">Select State</option>
+                  <option value="CA">California</option>
+                  <option value="TX">Texas</option>
+                  <option value="FL">Florida</option>
+                  <option value="NY">New York</option>
+                  <option value="IL">Illinois</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="OH">Ohio</option>
+                  <option value="GA">Georgia</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="MI">Michigan</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="IN">Indiana</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MD">Maryland</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="CO">Colorado</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="AL">Alabama</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="OR">Oregon</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="UT">Utah</option>
+                  <option value="NV">Nevada</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="KS">Kansas</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="ID">Idaho</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="ME">Maine</option>
+                  <option value="MT">Montana</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="DE">Delaware</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="AK">Alaska</option>
+                  <option value="DC">District of Columbia</option>
+                  <option value="VT">Vermont</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+                <span class="field-error" id="corp-state-error"></span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="entity-number">Entity Number <span class="optional">(optional)</span></label>
+                <input type="text" id="entity-number" name="entity-number" placeholder="e.g. C1234567" />
+              </div>
+              <div class="form-group form-group-action">
+                <button type="submit" class="btn btn-primary btn-search" id="search-btn">
+                  <span class="btn-text">Search Status</span>
+                  <span class="btn-loader" hidden>&#9696; Searching&hellip;</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Results Area -->
+        <div id="results-area" class="results-area" aria-live="polite" hidden>
+          <div class="card results-card" id="results-card">
+            <div class="results-header">
+              <h3 id="results-corp-name"></h3>
+              <span class="status-badge" id="status-badge"></span>
+            </div>
+            <div class="results-grid">
+              <div class="result-item">
+                <span class="result-label">Entity Number</span>
+                <span class="result-value" id="result-entity"></span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">State</span>
+                <span class="result-value" id="result-state"></span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Entity Type</span>
+                <span class="result-value" id="result-type"></span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Date Filed</span>
+                <span class="result-value" id="result-filed"></span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Status Since</span>
+                <span class="result-value" id="result-since"></span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Agent</span>
+                <span class="result-value" id="result-agent"></span>
+              </div>
+            </div>
+            <div id="suspension-notice" class="suspension-notice" hidden>
+              <p>&#9888; This corporation appears to be <strong>suspended</strong>. This may affect your ability to conduct business, enter into contracts, or defend lawsuits.</p>
+              <p>For professional assistance with reinstatement, visit <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer">Corp911.com</a> or <button class="link-btn" id="book-from-results">schedule an appointment</button> with our specialists.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Appointments Tab -->
+      <section id="panel-appointments" class="tab-panel" role="tabpanel" aria-labelledby="tab-appointments" hidden>
+        <div class="panel-header">
+          <h2>Schedule an Appointment</h2>
+          <p class="panel-subtitle">Book a consultation with our corporate reinstatement specialists.</p>
+        </div>
+
+        <div class="appointments-layout">
+          <!-- Left: Date + Slots -->
+          <div class="appointment-picker card">
+            <h3>Select Date &amp; Time</h3>
+            <div class="form-group">
+              <label for="appt-date">Choose a Date <span class="required">*</span></label>
+              <input type="date" id="appt-date" name="appt-date" />
+            </div>
+            <div id="slots-container">
+              <p class="slots-placeholder">Please select a date to view available time slots.</p>
+            </div>
+          </div>
+
+          <!-- Right: Booking Form -->
+          <div class="appointment-form card">
+            <h3>Your Information</h3>
+            <form id="appt-form" novalidate>
+              <div class="form-group">
+                <label for="appt-name">Full Name <span class="required">*</span></label>
+                <input type="text" id="appt-name" name="appt-name" placeholder="Jane Smith" required />
+                <span class="field-error" id="appt-name-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="appt-email">Email Address <span class="required">*</span></label>
+                <input type="email" id="appt-email" name="appt-email" placeholder="jane@example.com" required />
+                <span class="field-error" id="appt-email-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="appt-phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="appt-phone" name="appt-phone" placeholder="(555) 000-0000" required />
+                <span class="field-error" id="appt-phone-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="appt-corp">Corporation Name <span class="required">*</span></label>
+                <input type="text" id="appt-corp" name="appt-corp" placeholder="Acme Corporation" required />
+                <span class="field-error" id="appt-corp-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="appt-issue">Brief Description of Issue</label>
+                <textarea id="appt-issue" name="appt-issue" rows="4" placeholder="Describe your situation briefly (e.g., corporation suspended for failure to file annual report)..."></textarea>
+              </div>
+              <div class="selected-slot-display" id="selected-slot-display" hidden>
+                <span class="slot-label">Selected Slot:</span>
+                <span id="selected-slot-text" class="slot-value"></span>
+                <button type="button" class="clear-slot-btn" id="clear-slot-btn" aria-label="Clear selected slot">&times;</button>
+              </div>
+              <button type="submit" class="btn btn-primary btn-book" id="book-btn" disabled>
+                Book Appointment
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Confirmation -->
+        <div id="appt-confirmation" class="confirmation-card card" hidden>
+          <div class="confirmation-icon">&#10003;</div>
+          <h3>Appointment Confirmed!</h3>
+          <p id="confirmation-text"></p>
+          <p>You will receive a confirmation email shortly. For immediate assistance, contact <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer">Corp911.com</a>.</p>
+          <button class="btn btn-secondary" id="new-appt-btn">Schedule Another Appointment</button>
+        </div>
+      </section>
+
+      <!-- Information Tab -->
+      <section id="panel-info" class="tab-panel" role="tabpanel" aria-labelledby="tab-info" hidden>
+        <div class="panel-header">
+          <h2>Understanding Corporate Suspension</h2>
+          <p class="panel-subtitle">Learn what corporate suspension means and how to resolve it.</p>
+        </div>
+
+        <div class="info-grid">
+          <div class="card info-card">
+            <div class="info-icon">&#128203;</div>
+            <h3>What Is Corporate Suspension?</h3>
+            <p>Corporate suspension is a legal status imposed by the state when a corporation fails to meet certain administrative or tax requirements. A suspended corporation loses many of its legal rights and protections, including the ability to:</p>
+            <ul>
+              <li>Conduct business legally in the state</li>
+              <li>Enter into enforceable contracts</li>
+              <li>Initiate or maintain lawsuits</li>
+              <li>Sell or transfer corporate assets</li>
+              <li>Protect its corporate name</li>
+            </ul>
+          </div>
+
+          <div class="card info-card">
+            <div class="info-icon">&#9888;</div>
+            <h3>Common Reasons for Suspension</h3>
+            <ul>
+              <li><strong>Failure to file annual reports</strong> – Most states require annual or biennial statements</li>
+              <li><strong>Unpaid taxes or fees</strong> – State franchise taxes, LLC fees, or other state charges</li>
+              <li><strong>Failure to maintain a registered agent</strong> – Every entity must have a registered agent on file</li>
+              <li><strong>Non-compliance with state regulations</strong> – Missing required filings or licenses</li>
+              <li><strong>Dissolved but not properly wound down</strong> – Administrative dissolution by the state</li>
+            </ul>
+          </div>
+
+          <div class="card info-card">
+            <div class="info-icon">&#128196;</div>
+            <h3>How to Resolve Suspension</h3>
+            <p>Reinstatement typically requires:</p>
+            <ol>
+              <li><strong>Identify the reason</strong> – Check with the Secretary of State for the specific cause</li>
+              <li><strong>File missing documents</strong> – Submit any outstanding annual reports or statements</li>
+              <li><strong>Pay outstanding fees &amp; taxes</strong> – Clear all unpaid taxes, penalties, and interest</li>
+              <li><strong>Submit a reinstatement application</strong> – File the appropriate reinstatement form</li>
+              <li><strong>Pay reinstatement fee</strong> – Varies by state, typically $25–$500</li>
+            </ol>
+          </div>
+
+          <div class="card info-card">
+            <div class="info-icon">&#9200;</div>
+            <h3>How Long Does Reinstatement Take?</h3>
+            <p>Timelines vary by state and volume of filings:</p>
+            <ul>
+              <li><strong>Standard processing:</strong> 2–6 weeks</li>
+              <li><strong>Expedited processing:</strong> 1–5 business days (where available)</li>
+              <li><strong>Same-day service:</strong> Available in some states for additional fees</li>
+            </ul>
+            <p>Professional services like <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer">Corp911.com</a> can help expedite the process and ensure all filings are correct.</p>
+          </div>
+        </div>
+
+        <div class="card cta-card">
+          <h3>Need Professional Assistance?</h3>
+          <p>Corp911 specializes in corporate reinstatement services. Their experienced team can handle the entire process for you — from identifying the cause of suspension to filing all required documents and paying applicable fees.</p>
+          <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Visit Corp911.com for Professional Help
+          </a>
+        </div>
+      </section>
+
+      <!-- Resources Tab -->
+      <section id="panel-resources" class="tab-panel" role="tabpanel" aria-labelledby="tab-resources" hidden>
+        <div class="panel-header">
+          <h2>Resources &amp; Tools</h2>
+          <p class="panel-subtitle">Helpful links and resources for corporate reinstatement.</p>
+        </div>
+
+        <div class="resources-grid">
+          <div class="card resource-card featured-resource">
+            <div class="resource-badge">Recommended</div>
+            <div class="resource-logo">Corp<strong>911</strong></div>
+            <h3>Corp911.com – Professional Reinstatement Services</h3>
+            <p>Corp911 is the leading professional service for corporate reinstatement across all 50 states. Their team of experts handles every step of the reinstatement process:</p>
+            <ul>
+              <li>&#10003; Same-day and expedited processing available</li>
+              <li>&#10003; All 50 states covered</li>
+              <li>&#10003; Annual report filing services</li>
+              <li>&#10003; Registered agent services</li>
+              <li>&#10003; Corporate compliance monitoring</li>
+              <li>&#10003; Tax clearance certificate assistance</li>
+            </ul>
+            <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              Visit Corp911.com &rarr;
+            </a>
+          </div>
+
+          <div class="resource-links-column">
+            <div class="card resource-card">
+              <h3>&#127963; Secretary of State Portals</h3>
+              <p>Check your corporation's status directly on your state's official portal:</p>
+              <ul class="link-list">
+                <li><a href="https://bizfileonline.sos.ca.gov/" target="_blank" rel="noopener noreferrer">California – California Secretary of State</a></li>
+                <li><a href="https://www.sos.state.tx.us/corp/sosda/index.shtml" target="_blank" rel="noopener noreferrer">Texas – Texas Secretary of State</a></li>
+                <li><a href="https://efile.sunbiz.org/" target="_blank" rel="noopener noreferrer">Florida – Florida Division of Corporations</a></li>
+                <li><a href="https://apps.dos.ny.gov/publicInquiry/" target="_blank" rel="noopener noreferrer">New York – NY Division of Corporations</a></li>
+                <li><a href="https://www.ilsos.gov/corporatellc/" target="_blank" rel="noopener noreferrer">Illinois – Illinois Secretary of State</a></li>
+              </ul>
+            </div>
+
+            <div class="card resource-card">
+              <h3>&#128209; Helpful Guides</h3>
+              <ul class="link-list">
+                <li><a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer">Corp911 – Corporate Reinstatement Guide</a></li>
+                <li><a href="https://www.irs.gov/businesses/small-businesses-self-employed/corporation" target="_blank" rel="noopener noreferrer">IRS – Corporation Tax Information</a></li>
+                <li><a href="https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant" target="_blank" rel="noopener noreferrer">SBA – Stay Legally Compliant</a></li>
+              </ul>
+            </div>
+
+            <div class="card resource-card">
+              <h3>&#128222; Need Immediate Help?</h3>
+              <p>If your corporation is suspended and you need urgent assistance, Corp911 offers priority service to get your business back in good standing as quickly as possible.</p>
+              <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                Contact Corp911 Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">Corp<strong>911</strong></div>
+          <p>A free tool to check corporate suspension status. For professional reinstatement services, visit <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer">Corp911.com</a>.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#" onclick="switchTab('search'); return false;">Suspension Check</a></li>
+            <li><a href="#" onclick="switchTab('appointments'); return false;">Appointments</a></li>
+            <li><a href="#" onclick="switchTab('info'); return false;">Information</a></li>
+            <li><a href="#" onclick="switchTab('resources'); return false;">Resources</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer">Corp911.com</a></li>
+            <li><a href="https://www.irs.gov/businesses" target="_blank" rel="noopener noreferrer">IRS Business Center</a></li>
+            <li><a href="https://www.sba.gov/" target="_blank" rel="noopener noreferrer">Small Business Administration</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Corporation Suspension Checker. This tool provides informational results only. For official status, check your state's Secretary of State website. For professional assistance, visit <a href="https://www.corp911.com/" target="_blank" rel="noopener noreferrer">Corp911.com</a>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
